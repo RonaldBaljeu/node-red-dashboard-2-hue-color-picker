@@ -1,5 +1,5 @@
 module.exports = function (RED) {
-    function UIExampleNode (config) {
+    function UIExampleNode(config) {
         RED.nodes.createNode(this, config)
 
         const node = this
@@ -50,5 +50,5 @@ module.exports = function (RED) {
         }
     }
 
-    RED.nodes.registerType('ui-example', UIExampleNode)
+    RED.nodes.registerType('hue-color-picker', UIExampleNode)
 }

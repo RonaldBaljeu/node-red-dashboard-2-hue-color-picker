@@ -1,5 +1,5 @@
 {
-    "ui-example" : {
+    "hue-color-picker": {
         "label": {
             "size": "Size"
         }

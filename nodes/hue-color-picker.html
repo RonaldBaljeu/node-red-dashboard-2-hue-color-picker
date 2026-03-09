@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('ui-example', {
+    RED.nodes.registerType('hue-color-picker', {
         category: RED._('@flowfuse/node-red-dashboard/ui-base:ui-base.label.category'),
         color: RED._('@flowfuse/node-red-dashboard/ui-base:ui-base.colors.light'),
         defaults: {
@@ -23,8 +23,8 @@
         inputs: 1,
         outputs: 1,
         icon: "file.svg",
-        label: function() {
-            return this.name || "ui-example";
+        label: function () {
+            return this.name || "hue-color-picker";
         },
         oneditprepare: function () {
             $('#node-input-size').elementSizer({
@@ -36,7 +36,7 @@
     });
 </script>
 
-<script type="text/html" data-template-name="ui-example">
+<script type="text/html" data-template-name="hue-color-picker">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -46,7 +46,7 @@
         <input type="text" id="node-input-group">
     </div>
     <div class="form-row">
-        <label><i class="fa fa-object-group"></i> <span data-i18n="ui-example.label.size"></label>
+        <label><i class="fa fa-object-group"></i> <span data-i18n="hue-color-picker.label.size"></label>
         <input type="hidden" id="node-input-width">
         <input type="hidden" id="node-input-height">
         <button class="editor-button" id="node-input-size"></button>

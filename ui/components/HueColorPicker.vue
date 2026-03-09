@@ -1,6 +1,6 @@
 <template>
     <!-- Component must be wrapped in a block so props such as className and style can be passed in from parent -->
-    <div className="ui-example-wrapper">
+    <div className="hue-color-picker-wrapper">
         <h1>Example Integrated Widget: {{ id }}</h1>
 
         <!-- Note: We can use any Vuetify Components by default -->
@@ -60,13 +60,13 @@
         <p>Note: the vuex store is cleared on refresh of a screen, at which point, data will be loaded from the Node-RED datastore, should it be present.</p>
         <p>Send a message to this node in order to see the value here:</p>
         <pre>{{ messages && messages[id] ? messages[id] : 'No Data' }}</pre>
-        <p>Note that it persists, even after refresh. This is because, in our <code>onInput</code> event handler in our <code>ui-example.js</code> file, we store the message in the Node-RED datastore.</p>
+        <p>Note that it persists, even after refresh. This is because, in our <code>onInput</code> event handler in our <code>hue-color-picker.js</code> file, we store the message in the Node-RED datastore.</p>
 
         <!-- Note: We can use any Vuetify Components by default -->
         <h2>Styling with Vuetify &amp; CSS</h2>
         <p>
             We can define our own CSS within the widget's repository,
-            and expose classes like <code class="ui-example-class">ui-example-class</code>
+            and expose classes like <code class="hue-color-picker-class">hue-color-picker-class</code>
         </p>
         <p>
             Vuetify also comes with a handful of utility classes to assist with styling:
@@ -97,7 +97,7 @@ import toTitleCase from 'to-title-case'
 import { mapState } from 'vuex'
 
 export default {
-    name: 'UIExample',
+    name: 'HueColorPicker',
     inject: ['$socket', '$dataTracker'],
     props: {
         /* do not remove entries from this - Dashboard's Layout Manager's will pass this data to your component */
@@ -106,7 +106,7 @@ export default {
         state: { type: Object, default: () => ({ enabled: false, visible: false }) }
     },
     setup (props) {
-        console.info('UIExample setup with:', props)
+        console.info('HueColorPicker setup with:', props)
     },
     data () {
         return {
@@ -184,7 +184,7 @@ export default {
         },
         /*
             You can also emit custom events to Node-RED, which can be handled by a custom event handler
-            See the ui-example.js file for how to subscribe to these.
+            See the hue-color-picker.js file for how to subscribe to these.
         */
         test () {
             console.info('custom event handler:')
@@ -198,5 +198,5 @@ export default {
 
 <style scoped>
 /* CSS is auto scoped, but using named classes is still recommended */
-@import "../stylesheets/ui-example.css";
+@import "../stylesheets/hue-color-picker.css";
 </style>

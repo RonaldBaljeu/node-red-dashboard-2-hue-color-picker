@@ -7,7 +7,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // Set to this to the name of this collection of components
 // This must match node-red-dashboard-2.widgets[libraryName] in package.json
-const LIBRARY_NAME = 'ui-example'
+const LIBRARY_NAME = 'hue-color-picker'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -18,7 +18,7 @@ export default defineConfig({
             targets: [
                 {
                     // Copy the build output into Node-RED's /resources folder
-                    src: normalizePath(resolve(__dirname,`./ui/dist/${LIBRARY_NAME}.umd.js`)),
+                    src: normalizePath(resolve(__dirname, `./ui/dist/${LIBRARY_NAME}.umd.js`)),
                     dest: normalizePath(resolve(__dirname, 'resources'))
                 }
             ]

@@ -5,6 +5,6 @@
  */
 import { createApp } from 'vue'
 
-import UIExample from './components/UIExample.vue'
+import HueColorPicker from './components/HueColorPicker.vue'
 
-createApp(UIExample).mount('#app')
+createApp(HueColorPicker).mount('#app')
