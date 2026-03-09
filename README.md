@@ -1,32 +1,20 @@
-# Example Node for Node-RED Dashboard
+# Color picker for Philips Hue
 
+This repository is the very beginning of a CIE 1931 x/y
+color picker for Philips Hue lights. It is to be used
+in Node Red using Dashboard 2.0.
 
-This repository contains an example, third-party, node for the Node-RED Dashboard. 
+I just started this project. There is no usable code yet.
+This is work in progress.
 
-To get started, clone this repository:
-
-```bash
-# if using HTTPS:
-git clone https://github.com/FlowFuse/node-red-dashboard-2-ui-example.git
-
-# if using SSH:
-git clone git@github.com:FlowFuse/node-red-dashboard-2-ui-example.git
-```
-
-Then, you can install it's dependencies with:
-
-```bash
-npm install
-```
-
-## Development with Dashboard 2.0
-
-You can read our [contribution guide](https://dashboard.flowfuse.com/contributing/widgets/third-party.html) for details on developing your own Dashboard 2.0 integrations & widgets.
-
-This project is intended to be used as a starting point for creating your own custom nodes that can integrate directly with [Node-RED Dashboard 2.0](https://github.com/FlowFuse/flowforge-nr-dashboard).
-
-Note that if you're looking to contribute directly to Node-RED Dashboard 2.0, then use the examples already in the core repository to build on, as they are structured differently to external/third-party widgets.
-
-## Architecture
-
-All third-party (non-core) nodes for Node-RED Dashboard 2.0 are structured such that they extend the core `ui-template` node, and provide access such that you can define custom HTML, CSS, and JavaScript for your widget.
+The problem with existing color pickers is the fact that
+they are designed for the RGB color space, while Philips Hue
+operates in the XY color space. The API for Philips Hue has
+limited support for RGB, however it does so by converting
+RGB values into XY values and vice versa, causing information
+loss, which may lead to strange results.
+For example, setting the color to (0, 0, 255) will result
+in color (64, 0, 255). Feeding that back into the color picker
+will result in the cursor jumping far away from the user
+selected color. This color picker attempts to address
+this problem, by operating in the XY color space directly.
