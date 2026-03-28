@@ -90,6 +90,17 @@
 import toTitleCase from 'to-title-case'
 import { mapState } from 'vuex'
 
+const MAX_X = 0.75;
+const MAX_Y = 0.85;
+
+const WHITE_POINT = { x: 0.3127, y: 0.329 };
+
+const GAMUT_C = {
+    red: { x: 0.6915, y: 0.3083 },
+    green: { x: 0.17, y: 0.7 },
+    blue: { x: 0.1532, y: 0.0475 },
+};
+
 export default {
     name: 'HueColorPicker',
     inject: ['$socket', '$dataTracker'],
@@ -110,9 +121,6 @@ export default {
                 x: 0,
                 y: 0
             },
-            MAX_X: 0.75,
-            MAX_Y: 0.85,
-
             input: {
                 title: 'some text here will base turned into title case.'
             },
@@ -126,8 +134,8 @@ export default {
     },
     computed: {
         cursorStyle() {
-            const normX = (this.modelValue.x / this.MAX_X) * 2 - 1;
-            const normY = 1 - (this.modelValue.y / this.MAX_Y) * 2;
+            const normX = (this.modelValue.x / MAX_X) * 2 - 1;
+            const normY = 1 - (this.modelValue.y / MAX_Y) * 2;
 
             return {
                 left: `${this.radius + normX * this.radius}px`,
@@ -195,8 +203,8 @@ export default {
             ];
         },
         xyToCanvas(x, y) {
-            const normX = (x / this.MAX_X) * 2 - 1;
-            const normY = 1 - (y / this.MAX_Y) * 2;
+            const normX = (x / MAX_X) * 2 - 1;
+            const normY = 1 - (y / MAX_Y) * 2;
 
             return {
                 px: this.radius + normX * this.radius,
@@ -225,8 +233,8 @@ export default {
                     const normX = (px - this.radius) / this.radius;
                     const normY = (py - this.radius) / this.radius;
 
-                    const cieX = this.MAX_X * (normX + 1) / 2;
-                    const cieY = this.MAX_Y * (1 - (normY + 1) / 2);
+                    const cieX = MAX_X * (normX + 1) / 2;
+                    const cieY = MAX_Y * (1 - (normY + 1) / 2);
 
                     const [r, g, b] = this.xyToRgb(cieX, cieY);
 
@@ -243,12 +251,6 @@ export default {
             this.drawWhitePoint();
         },
         drawGamutTriangle() {
-            const GAMUT_C = {
-                red: { x: 0.6915, y: 0.3083 },
-                green: { x: 0.17, y: 0.7 },
-                blue: { x: 0.1532, y: 0.0475 },
-            };
-
             const r = this.xyToCanvas(GAMUT_C.red.x, GAMUT_C.red.y);
             const g = this.xyToCanvas(GAMUT_C.green.x, GAMUT_C.green.y);
             const b = this.xyToCanvas(GAMUT_C.blue.x, GAMUT_C.blue.y);
@@ -264,8 +266,6 @@ export default {
             this.ctx.stroke();
         },
         drawWhitePoint() {
-            const WHITE_POINT = { x: 0.3127, y: 0.329 };
-
             const { px, py } = this.xyToCanvas(
                 WHITE_POINT.x,
                 WHITE_POINT.y
@@ -308,8 +308,8 @@ export default {
             const normX = (px - this.radius) / this.radius;
             const normY = (py - this.radius) / this.radius;
 
-            const cieX = this.MAX_X * (normX + 1) / 2;
-            const cieY = this.MAX_Y * (1 - (normY + 1) / 2);
+            const cieX = MAX_X * (normX + 1) / 2;
+            const cieY = MAX_Y * (1 - (normY + 1) / 2);
 
             this.modelValue.x = cieX;
             this.modelValue.y = cieY;
