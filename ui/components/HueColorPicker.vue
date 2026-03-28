@@ -110,6 +110,8 @@ export default {
                 x: 0,
                 y: 0
             },
+            MAX_X: 0.75,
+            MAX_Y: 0.85,
 
             input: {
                 title: 'some text here will base turned into title case.'
@@ -124,8 +126,8 @@ export default {
     },
     computed: {
         cursorStyle() {
-            const normX = (this.modelValue.x / 0.8) * 2 - 1;
-            const normY = 1 - (this.modelValue.y / 0.9) * 2;
+            const normX = (this.modelValue.x / this.MAX_X) * 2 - 1;
+            const normY = 1 - (this.modelValue.y / this.MAX_Y) * 2;
 
             return {
                 left: `${this.radius + normX * this.radius}px`,
@@ -193,8 +195,8 @@ export default {
             ];
         },
         xyToCanvas(x, y) {
-            const normX = (x / 0.8) * 2 - 1;
-            const normY = 1 - (y / 0.9) * 2;
+            const normX = (x / this.MAX_X) * 2 - 1;
+            const normY = 1 - (y / this.MAX_Y) * 2;
 
             return {
                 px: this.radius + normX * this.radius,
@@ -223,8 +225,8 @@ export default {
                     const normX = (px - this.radius) / this.radius;
                     const normY = (py - this.radius) / this.radius;
 
-                    const cieX = 0.8 * (normX + 1) / 2;
-                    const cieY = 0.9 * (1 - (normY + 1) / 2);
+                    const cieX = this.MAX_X * (normX + 1) / 2;
+                    const cieY = this.MAX_Y * (1 - (normY + 1) / 2);
 
                     const [r, g, b] = this.xyToRgb(cieX, cieY);
 
@@ -306,8 +308,8 @@ export default {
             const normX = (px - this.radius) / this.radius;
             const normY = (py - this.radius) / this.radius;
 
-            const cieX = 0.8 * (normX + 1) / 2;
-            const cieY = 0.9 * (1 - (normY + 1) / 2);
+            const cieX = this.MAX_X * (normX + 1) / 2;
+            const cieY = this.MAX_Y * (1 - (normY + 1) / 2);
 
             this.modelValue.x = cieX;
             this.modelValue.y = cieY;
